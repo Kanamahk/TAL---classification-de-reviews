@@ -1,6 +1,6 @@
 #-*-coding:utf-8-*-
 
-def getReviewsFromFile(fileName): 
+def getWholeReviewFromFile(fileName): 
 	file_pointer = open(fileName, "r")
 	
 	gameName = file_pointer.readline()
@@ -15,9 +15,27 @@ def getReviewsFromFile(fileName):
 	
 	contents = gameName, opinion, hoursPlayed, writtenReviews, gamesPossessed, review
 	return contents
+
+def getGameName(review):
+	return review[0]
+	
+def getOpinion(review):
+	return review[1]
+
+def getHoursPlayed(review):
+	return review[2]
+
+def getWrittenReviews(review):
+	return review[3]
+	
+def getGamesPossessed(review):
+	return review[4]
+	
+def getReview(review):
+	return review[5]
 	
 	
-def printReview(review):
+def printWholeReview(review):
 	print("name of the game : " + review[0])
 	print("opinion : " + review[1])
 	print("number of hours played : " + review[2])
