@@ -1,0 +1,10 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/TAL---reviews-classification.pyproj
+/TAL---reviews-classification.sln
+/TAL---reviews-classification1.pyproj
+/__pycache__
+/.vs/TAL---reviews-classification1/v14
+/.vs/TAL---reviews-classification/v14
