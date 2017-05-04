@@ -6,7 +6,9 @@ from parseReview import *
 reviewsdirectory = "./reviews"
 
 if __name__=="__main__":
-	myReviews = os.listdir(reviewsdirectory)
+	myReviewsFileName = os.listdir(reviewsdirectory)
+	for r in myReviewsFileName:
+		myReviews.add(getReviewsFromFile(reviewsdirectory + '/' + r))
+		
 	for r in myReviews:
-		printReview(getReviewsFromFile(reviewsdirectory + '/' + r))
-	
+		printWholeReview(r)
