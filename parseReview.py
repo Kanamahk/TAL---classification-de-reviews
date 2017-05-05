@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
-from readFileFonctions import *
-from traitements import *
+from treatments import *
 
+from readFileFonctions import *
 def getWholeReviewFromFile(fileName): 
 	file_pointer = open(fileName, "r")
 	
@@ -48,27 +48,38 @@ def printWholeReview(review):
 		print('\t' + line)
 
 def print_analyse_review(review):
-    auxil = read_word_list_file("auxiliary_pos.txt")
-    posi = read_word_list_file("Positives.txt")
-    nega = read_word_list_file("Negative.txt")
-
-    reviewvalue = 0
-    for sent in segment_into_sents(review):
-        sentvalue = 0
-        print(sent)
-        tokens = tokenise_en(normalise(sent,"en"))
-        for tok in tokens:
-            if tok == "not":
-                sentvalue *= -1
-            for aux in auxil:
-                if tok == (aux + "n't") or tok == (aux + " not"):
-                    sentvalue *=-1
-            for pos in posi:
-                if tok == pos:
-                    sentvalue +=1
-            for neg in nega:
-                if tok == neg:
-                    sentvalue -=1
-        reviewvalue+=sentvalue
+	auxil = read_word_list_file("auxiliary_pos.txt")
+	posi = read_word_list_file("Positive.txt")
+	nega = read_word_list_file("Negative.txt")
+	para =""
+	for line in review:
+		print(line+";")
+		para += line
+	print (para) 
+	reviewvalue = 0
+	print ("begin")
+	#lapata =segment_into_sents(para)
+	#print(lapata)
+	for lint in review:
+		for sent in getSubSent((lint)):
+			sentvalue = 0
+			tokens = tokenise_en(normalise(sent,"en"))
+			for tok in tokens:
+				if tok == "not":
+					sentvalue *= -1
+				for aux in auxil:
+					if tok == (aux + "n't") or tok == (aux + " not"):
+						sentvalue *=-1
+				for pos in posi:
+					if tok == pos:
+						sentvalue +=1
+				for neg in nega:
+					if tok == neg:
+						sentvalue -=1
+			reviewvalue+=sentvalue
+	if reviewvalue > 0:
+		print ("this is a positive review")
+	else:
+		print ("this is a negative review")
 
 

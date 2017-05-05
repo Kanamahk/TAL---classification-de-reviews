@@ -13,3 +13,4 @@ if __name__=="__main__":
 		
 	for r in myReviews:
 		printWholeReview(r)
+		print_analyse_review(r[5])

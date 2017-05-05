@@ -2,13 +2,14 @@
 
 import re 
 import collections
+from readFileFonctions import *
 
 def segment_into_sents(paragraph):
 
 	cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
 	regex_cannot_precede = "(?:(?<!"+")(?<!".join(cannot_precede)+"))"
 	
-	if "\n" in paragraph: exit("Error in paragraph: paragraph contains \n.")	   
+	if "\n" in paragraph: exit("Error in paragraph: paragraph find \n.")	   
 	newline_separated = re.sub(regex_cannot_precede+"([\.\!\?]+([\'\â€™\"\)]*( |$)| [\'\â€™\"\) ]*))", r"\1\n", paragraph)
 	sents = newline_separated.strip().split("\n")
 	for s, sent in enumerate(sents):
@@ -46,13 +47,30 @@ def tokenise_en(sent):
 	sent = sent.split() # split on whitespace
 	return sent
 
-def tokenise(sent, lang):
-	if lang=="en":
+def tokenise(sent): #as we only analyse english reviews, we do not need any other language
 		return tokenise_en(sent)
-	elif lang=="fr":
-		return tokenise_fr(sent)
-	else:
-		exit("Lang: "+str(lang)+" not recognised for tokenisation.\n")
+
+def getSubSent(sent):
+    if not (sent.find(',') or sent.find(';') or sent.find(':') ):
+        subsents =[]
+        for conj in coordination:
+            if sent.find(conj):
+                subsents.append(sent.split(conj)[0])
+                subsents.append(sent.split(conj)[1])
+    else :
+        conjuction = read_word_list_file("Conjunction.txt")
+        subsents =[]
+        for sub in sent.split(','):
+            subsents.append(sub)
+        for sub in sent.split(';'):
+            subsents.append(sub)
+        for sub in sent.split(':'):
+            subsents.append(sub)
+        for conj in conjuction:
+            if sent.find(conj):
+                for sub in sent.split(conj):
+                    subsents.append(sub)
+    return subsents
 
 
 def test_segments_into_sents():
