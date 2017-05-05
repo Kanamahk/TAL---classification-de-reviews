@@ -7,8 +7,9 @@ reviewsdirectory = "./reviews"
 
 if __name__=="__main__":
 	myReviewsFileName = os.listdir(reviewsdirectory)
+	myReviews =[]
 	for r in myReviewsFileName:
-		myReviews.add(getReviewsFromFile(reviewsdirectory + '/' + r))
+		myReviews.append(getWholeReviewFromFile(reviewsdirectory + '/' + r))
 		
 	for r in myReviews:
 		printWholeReview(r)

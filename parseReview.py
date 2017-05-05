@@ -51,6 +51,7 @@ def print_analyse_review(review):
     auxil = read_word_list_file("auxiliary_pos.txt")
     posi = read_word_list_file("Positives.txt")
     nega = read_word_list_file("Negative.txt")
+
     reviewvalue = 0
     for sent in segment_into_sents(review):
         sentvalue = 0
@@ -69,4 +70,5 @@ def print_analyse_review(review):
                 if tok == neg:
                     sentvalue -=1
         reviewvalue+=sentvalue
+
 
