@@ -12,5 +12,8 @@ if __name__=="__main__":
 		myReviews.append(getWholeReviewFromFile(reviewsdirectory + '/' + r))
 		
 	for r in myReviews:
-		printWholeReview(r)
-		print_analyse_review(r[5])
+		#printWholeReview(r)
+		print("\n\ntoken analyse\n")
+		print_token_analyse_review(r[5])
+		print("\n\nsubsent analyse\n")
+		print_subsent_analyse_review(r[5])
