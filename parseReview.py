@@ -1,4 +1,6 @@
 #-*-coding:utf-8-*-
+from readFileFonctions import *
+from traitements import *
 
 def getWholeReviewFromFile(fileName): 
 	file_pointer = open(fileName, "r")
@@ -43,4 +45,28 @@ def printWholeReview(review):
 	print("number of games possessed : " + review[4])
 	print("review : ")
 	for line in review[5]:
-		print('\t'+line)
+		print('\t' + line)
+
+def print_analyse_review(review):
+    auxil = read_word_list_file("auxiliary_pos.txt")
+    posi = read_word_list_file("Positives.txt")
+    nega = read_word_list_file("Negative.txt")
+    reviewvalue = 0
+    for sent in segment_into_sents(review):
+        sentvalue = 0
+        print(sent)
+        tokens = tokenise_en(normalise(sent,"en"))
+        for tok in tokens:
+            if tok == "not":
+                sentvalue *= -1
+            for aux in auxil:
+                if tok == (aux + "n't") or tok == (aux + " not"):
+                    sentvalue *=-1
+            for pos in posi:
+                if tok == pos:
+                    sentvalue +=1
+            for neg in nega:
+                if tok == neg:
+                    sentvalue -=1
+        reviewvalue+=sentvalue
+
