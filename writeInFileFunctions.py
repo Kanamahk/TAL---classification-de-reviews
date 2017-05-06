@@ -1,33 +1,5 @@
 #-*-coding:utf-8-*-
 
-'''
-def writeTextInFile(text, fileName):
-	file_pointer = open(fileName, "w")
-	file_pointer.write(text)
-	file_pointer.close()
-
-def write_paragraph_file(list_paras, fileName):
-	file_pointer = open(fileName, "w")
-	for line in list_paras :
-		file_pointer.write(line)
-	file_pointer.close()
-
-def write_file_word_list(list_paras, fileName):
-	file_pointer = open(fileName, "w")
-	for line in list_paras :
-		file_pointer.write(line)
-	file_pointer.close()
-
-
-def write_file_tabseparate(liste_wordifo, fileName):
-	file_pointer = open(fileName, "w")	
-	for line in liste_wordifo :
-		for word in line:
-			file_pointer.write(word + " ; ")
-		file_pointer.write("\n")
-	file_pointer.close()
-'''
-
 def write_word_file(wordList, fileName):
 	file_pointer = open(fileName, "w")
 	for word in wordList:

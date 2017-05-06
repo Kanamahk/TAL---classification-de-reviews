@@ -41,26 +41,23 @@ def getReview(review):
 	
 	
 def printWholeReview(review):
-	print("name of the game : " + review[0])
-	print("opinion : " + review[1])
-	print("number of hours played : " + review[2])
-	print("number of written reviews : " + review[3])
-	print("number of games possessed : " + review[4])
+	print("name of the game : " + getGameName(review))
+	print("opinion : " + getOpinion(review))
+	print("number of hours played : " + getHoursPlayed(review))
+	print("number of written reviews : " + getWrittenReviews(review))
+	print("number of games possessed : " +etGamesPossessed(review))
 	print("review : ")
-	for line in review[5]:
+	for line in getReview(review):
 		print('\t' + line)
-
+	
+		
 def print_token_analyse_review(review):
 	auxil = read_word_list_file("auxiliary_pos.txt")
 	posi = read_word_list_file("Positive.txt")
 	nega = read_word_list_file("Negative.txt")
-	para =""
-	for line in review:
-		para += line
-	print (para) 
 	reviewvalue = 0
-	for lint in review:
-		for sent in getSubSent((lint)):
+	for line in review:
+		for sent in getSubSent((line)):
 			sentvalue = 0
 			tokens = tokenise_en(normalise(sent))
 			for tok in tokens:
@@ -76,19 +73,15 @@ def print_token_analyse_review(review):
 					if tok == (aux + "n't") or tok == (aux + " not"):
 						sentvalue *=-1
 			reviewvalue+=sentvalue
-	if reviewvalue > 0: print ("\n~~~~this is a positive review~~~~")
-	if reviewvalue<0: print ("\n~~~~this is a negative review~~~~")
-	if reviewvalue == 0 : print("\n~~~~this is a neutral review~~~~")
+	if reviewvalue > 0: print ("This is a positive review.")
+	if reviewvalue<0: print ("This is a negative review.")
+	if reviewvalue == 0 : print("This is a neutral review.")
 
 
 def print_subsent_analyse_review(review):
 	auxil = read_word_list_file("auxiliary_pos.txt")
 	posi = read_word_list_file("Positive.txt")
 	nega = read_word_list_file("Negative.txt")
-	para =""
-	for line in review:
-		para += line
-	print (para) 
 	reviewvalue = 0
 	for lint in review:
 		for sent in getSubSent((lint)):
@@ -101,6 +94,6 @@ def print_subsent_analyse_review(review):
 			for aux in auxil:
 				if sent.find(aux+"'nt"): sentvalue *=-1
 			reviewvalue+=sentvalue
-	if reviewvalue > 0: print ("\n~~~~this is a positive review~~~~")
-	if reviewvalue <0: print ("\n~~~~this is a negative review~~~~")
-	if reviewvalue == 0 : print("\n~~~~this is a neutral review~~~~")
+	if reviewvalue > 0: print ("This is a positive review.")
+	if reviewvalue<0: print ("This is a negative review.")
+	if reviewvalue == 0 : print("This is a neutral review.")
