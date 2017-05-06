@@ -3,6 +3,14 @@
 import re 
 import collections
 
+def text_into_paragraphs(text):
+	paragraphs = []
+	for line in text:
+		if line.strip()=="": continue # ignore blank paragraphs
+		paragraphs.append(line.strip()) # remove whitespace with strip()
+	
+	return paragraphs
+
 def segment_into_sents(paragraph):
 
 	cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
@@ -16,22 +24,35 @@ def segment_into_sents(paragraph):
 	return sents
 
 
-def normalise(sent, lang):
+def normalise(sent):
 	sent = re.sub("\'\'", '"', sent) # two single quotes = double quotes
 	sent = re.sub("[`â€˜â€™]+", r"'", sent) # normalise apostrophes/single quotes
 	sent = re.sub("[â‰ªâ‰«â€œâ€]", '"', sent) # normalise double quotes
 
-	if lang=="en":
-		sent = re.sub("([a-z]{3,})or", r"\1our", sent) # replace ..or words with ..our words (American versus British)
-		sent = re.sub("([a-z]{2,})iz([eai])", r"\1is\2", sent) # replace ize with ise (..ise, ...isation, ..ising)
-	if lang=="fr":
-		replacements = [("keske", "qu' est -ce que"), ("estke", "est -ce que"), ("bcp", "beaucoup")] # etc.
-		for (original, replacement) in replacements:
-			sent = re.sub("(^| )"+original+"( |$)", r"\1"+replacement+r"\2", sent)
+	sent = re.sub("([a-z]{3,})or", r"\1our", sent) # replace ..or words with ..our words (American versus British)
+	sent = re.sub("([a-z]{2,})iz([eai])", r"\1is\2", sent) # replace ize with ise (..ise, ...isation, ..ising)
+	
+	sent = re.sub(r"(?P<beginning>(^| |\n))+(?P<cap>[A-Z])(?P<end>[^A-Z])",  lambda m: m.group('beginning')+m.group('cap').lower()+m.group('end'), sent)
+	
+	
+	sent = re.sub(r"(?P<beginning>(^| |\n))+(?P<cap>i)(?P<end>[^a-zA-Z])",  lambda m: m.group('beginning')+m.group('cap').upper()+m.group('end'), sent)
+	
+	replacements = [("it's", "it is"), ("she’s", "she is"), ("he’s", "he is"), ("someone’s", "someone is"), ("something’s", "something is"), ("there’s", "there is"),("that’s", "that is"), ("what’s", "what is"), ("who’s", "who is"), ("where’s", "where is"), ("why’s", "why is"), ("when’s", "when is"), ("y'all", "you all"), ("ain't", "are not"), ("can't", "cannot"), ("gonna", "going to"), ("gotta", "got to"), ("shan’t", "shall not"), ("won't", "will not"), ("youre", "you are")] # etc.
+	
+	for (original, replacement) in replacements:
+		sent = re.sub("(^| )"+original+"( |$)", r"\1"+replacement+r"\2", sent)
 	return sent
 	
-def tokenise_en(sent):
+	sent = re.sub("([a-z]n't)", r"\1 not", sent)
+	sent = re.sub("([a-z]'ve)", r"\1 have", sent)
+	sent = re.sub("([a-z]'ll)", r"\1 will", sent)
+	sent = re.sub("([a-z]'d)", r"\1 would", sent)
+	sent = re.sub("([a-z]'re)", r"\1 are", sent)
+	sent = re.sub("([a-z]'m)", r"\1 am", sent)
 
+
+	
+def tokenise_en(sent):
 	sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
 	sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left
 
@@ -46,13 +67,8 @@ def tokenise_en(sent):
 	sent = sent.split() # split on whitespace
 	return sent
 
-def tokenise(sent, lang):
-	if lang=="en":
-		return tokenise_en(sent)
-	elif lang=="fr":
-		return tokenise_fr(sent)
-	else:
-		exit("Lang: "+str(lang)+" not recognised for tokenisation.\n")
+def tokenise(sent):
+	return tokenise_en(sent)
 
 
 def test_segments_into_sents():
