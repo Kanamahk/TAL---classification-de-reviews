@@ -26,55 +26,73 @@ Bryan VIGEE}
 \setcounter{page}{1}
 \chapter{Introduction}
 \section{Objectives of the project}
-	The purpose of this project was to gather data on how much Steam community players appreciated a specific game thanks to their reviews. According to their content and other criteria, a global appreciation can stand out from those reviews. \\
+	The purpose of this project was to gather data on how much Steam community players appreciated a specific game thanks to their reviews. According to their content and other criteria, a global appreciation can stand out from those reviews. \\ \linebreak
+The data extraction will be organised by a wide range of rules which enable to parse all the comments and get the indications on the reviewer's feeling. The technical details from each review should pertain to Video Games and Software/Hardware areas. 
 
+	
 \section{Motivation}
 	As Video Game players, it is interesting to get feedback from other people about how they think in playing a game. Furthermore, it might be possible to obtain the general rating players tend to evaluate for a game and on which arguments they lean on to do so.  This general rating can be different according to Gamer communities. Thus, it might be possible to distinguish the criteria that are believed to be important for them in order to make a enjoyable game on technical and artistic characteristics.
-\\
+\linebreak \linebreak
 	Moreover, extracting data from those evaluations could be useful for Video Game studios as it provides clear directions for developers to improve their future games. Indeed, sorting information on the different aspects of the game narrows down the key issues to deal with. Thus, developers  can come up with new development strategies promptly.
+
+Eventually, it would identify for each communities their likings as well as their preferences for each Video Game genre.  Then, a system could be set so that it gives recommendations or suggestions to gamers that would match their likings. Or perhaps it would provide comprehensive briefings on a game, since most reviews have been written with a subjective point of view.\linebreak 
 
 
 \chapter{Code Organisation}
 \section{Algorithms}
 \subsection{Main ideas}
-\subsection{List of files}
-	Here is a description of each file and with a short description of their content:\\
+The program reads different reviews files from the folder. It extracts all the necessary information about the reviewer before parsing his/her text. This prevents from giving too much credits for a review if it is not relevant to take it account. Once the review was parsedn normalised and tokenised, all terms defining the player's feeling (positive or negative) are checked. Adding them up gives a value representing the reviewer's overall feeling.
+\\
 
-\textbf{parseReview :} \\
+
+\subsection{List of files}
+	Here is a description of each file and with a short description of their content:
+\begin{itemize}
+	\item \textbf{parseReview :} \\
 This file gathers functions in order to parse a review and extract a '"value"' which gives an idea whether the reviewer enjoyed playing the game.
 
 A review is a list (of strings) containing  the name of the game reviewed, the status of the review (this help us know if this review is reliable or not), the number of reviews written by the player, the number of games played and the review itself. 
 
-\textbf{connotedDictionary :} \\
+	\item \textbf{connotedDictionary :} \\
 
-\textbf{readInFileFunctions and writeInFileFunctions :} \\
+	\item \textbf{readInFileFunctions and writeInFileFunctions :} \\
 Utility functions that enables to read and write in files. 
 
-\textbf{treatments :} \\  
+	\item \textbf{treatments :} \\  
 Utility functions from the previous tutorials in class which enables to parse sentences to tokenise them. The function \textbf{getSubSent} parse a sentence into "`sub sentences"' according to the number of its clauses.
 
-\textbf{Negative.txt, Positive.txt, Conjonction.text, auxiliary\_pos.txt :} \\
-Negative.txt and Positive.txt gather together respectively derogatory and positive terms. They have an essential part in evaluating the review. Conjonction.txt has coordinating conjunctions which allow to parse a complex sentence. Eventually, auxiliary\_pos.txt contains most of the modals. 
+	\item \textbf{Negative.txt, Positive.txt, Conjonction.text, auxiliary\_pos.txt :} \\
+Negative.txt and Positive.txt gather together respectively derogatory and positive terms. They have an essential part in evaluating the review. Conjonction.txt has coordinating conjunctions which allow to parse a complex sentence. Eventually, auxiliary\_pos.txt contains most of the modals.\\
+\end{itemize}
 
 \section{Dispatching the tasks}
 	Here is the contribution of the three members on this project :
 \\
 \textbf{Tristan : } Conception of reviews and determining statistics, wrote parseReview, mainStat.
 \\
-\textbf{Bryan : } wrote sentence-parsing and review analysis functions, also wrote in parseReview, included positive, negative and modal terms.
-\\The analysis process starts with the review's separation in sentences. Then the sentences are split in sub-sentences with the conjunction, coordinating or subordinating. This split done, the two different analysis begin. 
-\itemize{
-\item The token analysis.
-\\the first analysis is a token analysis. Each token is compared to a list of words, positive, negative and auxiliaries contained in 3 different dictionaries. if the token is a positive word, the sub-sentence value is increased by one. If the token is a negative word, the sub-sentence value is decreased by one. If the word is an auxiliary, the value of the sentence is not changed, but if the word is a negative form of an auxiliary, the sub-sentence value becomes the same time -1. The value of each sub-sentence is summed with the other to create the value of the review. if this value is more than 0, the review is considered positive, is it is less than 0 it is considered a negative review. if the value is 0, the review is considered a neutral review.
-\\this analysis can be wrong because there a numerous neutral words, and sometimes the first word of a sentence is a word used to determine if a auxiliary is at a negative form or not, the sub-sentence value is then 0 and unchanged because 0*-1 is still 0. that is why I implemented a second review analysis. 
-\item The sub-sentence analysis.
-\\This analysis checks the presence of each word, positive or negative, in the sub sentences, and only after all these words are found, it checks the auxiliaries to determine if it is a positive or a negative sub-sentence. finding a positive or negative word has the same effect in both analysis methods, the same process is use for the auxiliaries research.
-}
+\textbf{Bryan : } wrote sentence-parsing and review analysis functions, also wrote in parseReview, included positive, negative and modal terms.\\
 \textbf{Shankar : } included reviews and some terms in text files.
 \\
 Everyone took part in writing this report.
+\\ \linebreak
+\section{Analysis algorithms}
+The analysis process starts with the review's separation in sentences. Then the sentences are split in sub-sentences with the conjunction, coordinating or subordinating. This split done, the two different analysis begin. 
+\itemize{
+\item \textbf{The token analysis.}
+\\The first analysis is a token analysis. Each token is compared to a list of words, positive, negative and auxiliaries contained in 3 different dictionaries. If the token is a positive word, the sub-sentence value is increased by one. If the token is a negative word, the sub-sentence value is decreased by one. If the word is an auxiliary, the value of the sentence is not changed, but if the word is a negative form of an auxiliary, the sub-sentence value becomes the same time -1. The value of each sub-sentence is summed with the other to create the value of the review. if this value is more than 0, the review is considered positive, if it is less than 0 it is considered a negative review. If the value is 0, the review is considered a neutral review.
+\\ \linebreak This analysis can be wrong because there a numerous neutral words, and sometimes the first word of a sentence is a word used to determine if a auxiliary is at a negative form or not, the sub-sentence value is then 0 and unchanged because 0*-1 is still 0. That is why a second review analysis was implemented. 
+\item \textbf{The sub-sentence analysis.}
+\\This analysis checks the presence of each word, positive or negative, in the sub sentences, and only after all these words are found, it checks the auxiliaries to determine if it is a positive or a negative sub-sentence. Finding a positive or negative word has the same effect in both analysis methods, the same process is used for the auxiliaries research.
+}
 
 \chapter{Overview of the project}
 \section{Difficulties encountered}
-\section{Possible enhancements}
+Our project only used reviews which are mainly positive. 
+\section{Suggestions and enhancements}
+First, it could have possible to implement a classification according to specific/technical details that would have made our analysis algorithms more efficient and interesting. It was not done because the analysis cannot determine properly the right function of a word in a sentence. Thus, it was difficult to associate a technical detail with a annotated term, not only because they are presented in the same sentence. This is why the implementation of syntax grammar may improve our analysis algorithm and make it efficient to sort the feedback about the different aspects of the game.
+\\
+\linebreak
+In addition, recognising sarcasm or irony might have been a great improvement as our algorithm could cover a variety of reviews and it would return trustworthy analysis. Moreover, our text files were all handed written, which do not gather enough terms to handle all the qualifying adjectives. Thus the program misses important information. Using a huge amount of data for qualifying adjective and terms may reveal the actual performance of the algorithm (and at the same make the dictionary trustworthy). And increasing the number of reviews would also be efficient since the occurrences would have had a "`neutral"' meaning (it is the sum of the positive terms used minus the negative ones). Then, the other parameters such as the number of reviews written or the number of hours played would have a more important part in order to distinguish the best reviews.
+\linebreak 
+Finally, with these improvements, it can be possible to set up a trust scale for each review and select only those which are the most interesting for data analysis. 
 \end{document}
