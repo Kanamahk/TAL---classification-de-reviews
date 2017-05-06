@@ -22,7 +22,10 @@ def getGameName(review):
 	return review[0]
 	
 def getOpinion(review):
-	return review[1]
+	opinion = review[1]
+	if opinion[-1] == "\n":
+		opinion = opinion[:-1]
+	return opinion
 
 def getHoursPlayed(review):
 	return review[2]
@@ -56,8 +59,6 @@ def print_token_analyse_review(review):
 		para += line
 	print (para) 
 	reviewvalue = 0
-	#lapata =segment_into_sents(para)
-	#print(lapata)
 	for lint in review:
 		for sent in getSubSent((lint)):
 			sentvalue = 0
@@ -89,8 +90,6 @@ def print_subsent_analyse_review(review):
 		para += line
 	print (para) 
 	reviewvalue = 0
-	#lapata =segment_into_sents(para)
-	#print(lapata)
 	for lint in review:
 		for sent in getSubSent((lint)):
 			sentvalue = 0

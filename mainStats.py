@@ -5,6 +5,7 @@ from collections import OrderedDict
 from parseReview import *
 from treatments import *
 from writeInFileFunctions import *
+from connotatedDictionary import *
 
 reviewsdirectory = "./reviews"
 outputFile = "of.txt"
@@ -12,6 +13,7 @@ outputFile = "of.txt"
 if __name__=="__main__":
 	myReviewsFileName = os.listdir(reviewsdirectory)
 	
+	'''
 	myReviews=[]
 	
 	for r in myReviewsFileName:
@@ -46,3 +48,7 @@ if __name__=="__main__":
 
 
 		occ2count = get_occ2count(tok2count)
+	'''
+	
+	dict = getConnotatedDictionary()
+	WriteConnotatedDictionary(dict)
