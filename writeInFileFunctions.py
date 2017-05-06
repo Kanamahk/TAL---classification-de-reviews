@@ -52,7 +52,7 @@ def write_tab_separated_file(rows, fileName):
 			filepointer.write("\t".join(row)+"\n") 
 
 def write_dict(dictionary, fileName):
-	with open(fileName, "w") as filepointer:
+	with open(fileName, "w+") as filepointer:
 		for tok in dictionary:
 			filepointer.write(tok+" : " + str(dictionary[tok]) +"\n")
 

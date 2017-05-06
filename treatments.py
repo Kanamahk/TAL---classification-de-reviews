@@ -33,8 +33,6 @@ def normalise(sent):
 	sent = re.sub("([a-z]{2,})iz([eai])", r"\1is\2", sent) # replace ize with ise (..ise, ...isation, ..ising)
 	
 	sent = re.sub(r"(?P<beginning>(^| |\n))+(?P<cap>[A-Z])(?P<end>[^A-Z])",  lambda m: m.group('beginning')+m.group('cap').lower()+m.group('end'), sent)
-	
-	
 	sent = re.sub(r"(?P<beginning>(^| |\n))+(?P<cap>i)(?P<end>[^a-zA-Z])",  lambda m: m.group('beginning')+m.group('cap').upper()+m.group('end'), sent)
 	
 	replacements = [("it's", "it is"), ("she’s", "she is"), ("he’s", "he is"), ("someone’s", "someone is"), ("something’s", "something is"), ("there’s", "there is"),("that’s", "that is"), ("what’s", "what is"), ("who’s", "who is"), ("where’s", "where is"), ("why’s", "why is"), ("when’s", "when is"), ("y'all", "you all"), ("ain't", "are not"), ("can't", "cannot"), ("gonna", "going to"), ("gotta", "got to"), ("shan’t", "shall not"), ("won't", "will not"), ("youre", "you are")] # etc.
@@ -75,8 +73,12 @@ def getSubSent(sent):
 def tokenise_en(sent):
 	sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
 	sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left
+	sent = re.sub("([^ ])\"", r"\1 \"", sent) # separate double quote from preceding word by a space if no space to left
+	sent = re.sub(" \"", r" \" ", sent) # separate double quote from following word if a space if left
 
-	sent = re.sub(" \(", r" \( ", sent) # separate ( from following word if a space 
+	sent = re.sub("([^ ])!", r"\1 !", sent)
+	
+	sent = re.sub("\(", r"\( ", sent) # separate ( from following word if a space 
 	sent = re.sub("([^ ])\) ", r" \) ", sent) # separate ) from following word if a space 
 
 	# separate on punctuation
