@@ -6,7 +6,9 @@ Authors : Tristan HERMANT, Shankar SIVAGNA, Bryan VIGEE
 Domain of the study : video games reviews from the Steam platform.
 
 
-To run the program, you just have to execute the file main.py.
+To run the program, you just have to execute the file main.py. It can run on any python version, but the newer the better (it is certain to work on python3).
+
+There are currently 12 reviews of the game "Gary's Mod".
 
 It is possible to add new reviews. 
 To do so write your review in this format :
