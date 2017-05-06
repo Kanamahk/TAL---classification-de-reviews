@@ -1,5 +1,5 @@
 #-*-coding:utf-8-*-
-
+from readFileFonctions import *
 import re 
 import collections
 
@@ -50,8 +50,28 @@ def normalise(sent):
 	sent = re.sub("([a-z]'re)", r"\1 are", sent)
 	sent = re.sub("([a-z]'m)", r"\1 am", sent)
 
+def getSubSent(sent):
+    if not (sent.find(',') or sent.find(';') or sent.find(':') ):
+        subsents =[]
+        for conj in coordination:
+            if sent.find(conj):
+                for sub in sent.split(conj):
+                    subsents.append(sub)
+    else :
+        conjuction = read_word_list_file("Conjunction.txt")
+        subsents =[]
+        for sub in sent.split(','):
+            subsents.append(sub)
+        for sub in sent.split(';'):
+            subsents.append(sub)
+        for sub in sent.split(':'):
+            subsents.append(sub)
+        for conj in conjuction:
+            if sent.find(conj):
+                for sub in sent.split(conj):
+                    subsents.append(sub)
+    return subsents
 
-	
 def tokenise_en(sent):
 	sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
 	sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left

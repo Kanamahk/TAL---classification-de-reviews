@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 from treatments import *
 
-from readFileFonctions import *
+
 def getWholeReviewFromFile(fileName): 
 	file_pointer = open(fileName, "r")
 	
@@ -61,7 +61,7 @@ def print_token_analyse_review(review):
 	for lint in review:
 		for sent in getSubSent((lint)):
 			sentvalue = 0
-			tokens = tokenise_en(normalise(sent,"en"))
+			tokens = tokenise_en(normalise(sent))
 			for tok in tokens:
 				for pos in posi:
 					if tok == pos:
