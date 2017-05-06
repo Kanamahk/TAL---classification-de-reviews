@@ -18,6 +18,7 @@ might
 should
 could
 would
+ought
 shall
 will
 can

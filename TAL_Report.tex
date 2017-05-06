@@ -1,30 +1,67 @@
 \documentclass[paper=a4,fontsize=12pt]{report}
+\parindent0pt  \parskip10pt
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{titling}
+\usepackage[margin=0.5in]{geometry}
 
-\title{TAL Project Report
-\\Review classification}
-\author{Tristan HERMANT
+\title{ \LARGE \textbf{TAL Project Report
+\\Review classification} \\
+\includegraphics[width=15cm,height=5cm]{POLYTECH_PARIS-SUD_RVB.jpg}}
+\author{\large Tristan HERMANT
 \and
 Shankar SIVAGNA
 \and
 Bryan VIGEE}
 \date{May 6th 2017}
 
+
 \begin{document}
+
 \maketitle
-\begin{center}
-\includegraphics{POLYTECH_PARIS-SUD_RVB.jpg}
-\end{center}
+
 \tableofcontents
+\setcounter{page}{1}
+\chapter{Introduction}
+\section{Objectives of the project}
+The purpose of this project was to gather data on how much Steam community players appreciated a specific game thanks to their reviews. According to their content and other criteria, a global appreciation can stand out from those reviews. \\
 
-\part{Introduction}
-\section{Description}
-\paragraph{The purpose of this project was to gather data on how much Steam community players appreciated a specific game thanks to their reviews. According to their content and other criteria, a global appreciation can stand out from those reviews.}
+\section{Motivation}
+As Video Game players, it is interesting to get feedback from other people about how they think in playing a game. Furthermore, it might be possible to obtain the general rating players tend to evaluate for a game and on which arguments they lean on to do so.  This general rating can be different according to Gamer communities. Thus, it might be possible to distinguish the criteria that are believed to be important for them in order to make a enjoyable game on technical and artistic characteristics. 
 
-\part{Code Organisation}
+
+\chapter{Code Organisation}
 \section{Algorithms}
+\subsection{Main ideas}
+\subsection{List of files}
+Here is a description of each file and with a short description of their content:\\
 
+\textbf{parseReview :} \\
+this file gathers functions in order to parse a review and extract a '"value"' which gives an idea whether the reviewer enjoyed playing the game.
+
+A review is a list (of strings) containing  the name of the game reviewed, the status of the review (this help us know if this review is reliable or not), the number of reviews written by the player, the number of games played and the review itself. 
+
+\textbf{connotedDictionary :} \\
+
+\textbf{readInFileFunctions and writeInFileFunctions :} \\
+Utility functions that enables to read and write in files. 
+
+\textbf{treatments :} \\  
+Utility functions from the previous tutorials in class which enables to parse sentences to tokenise them. The function \textbf{getSubSent} parse a sentence into "`sub sentences"' according to the number of its clauses.
+
+\textbf{Negative.txt, Positive.txt, Conjonction.text, auxiliary\_pos.txt :} \\
+Negative.txt and Positive.txt gather together respectively derogatory and positive terms. They have an essential part in evaluating the review. Conjonction.txt has coordinating conjunctions which allow to parse a complex sentence. Eventually, auxiliary\_pos.txt contains most of the modals. 
+
+\section{Dispatching the tasks}
+Here is the contribution of the three members on this project :
+\\
+\textbf{Tristan : } Conception of reviews and determining statistics, wrote parseReview, mainStat.
+\\
+\textbf{Bryan : } wrote sentence-parsing and review analysis functions, included positive, negative and modal terms.
+\\
+\textbf{Shankar : } included reviews and some terms in text files.
+\\
+Everyone took part in writing this report.
 \end{document}

@@ -37,6 +37,7 @@ wherever
 as though 
 since
 while
+whilst
 because 
 so that
 before 
@@ -78,3 +79,4 @@ Even if
 That
 Even though   
 Though
+despite
