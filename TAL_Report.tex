@@ -61,8 +61,15 @@ Negative.txt and Positive.txt gather together respectively derogatory and positi
 \\
 \textbf{Tristan : } Conception of reviews and determining statistics, wrote parseReview, mainStat.
 \\
-\textbf{Bryan : } wrote sentence-parsing and review analysis functions, included positive, negative and modal terms.
-\\
+\textbf{Bryan : } wrote sentence-parsing and review analysis functions, also wrote in parseReview, included positive, negative and modal terms.
+\\The analysis process starts with the review's separation in sentences. Then the sentences are split in sub-sentences with the conjunction, coordinating or subordinating. This split done, the two different analysis begin. 
+\itemize{
+\item The token analysis.
+\\the first analysis is a token analysis. Each token is compared to a list of words, positive, negative and auxiliaries contained in 3 different dictionaries. if the token is a positive word, the sub-sentence value is increased by one. If the token is a negative word, the sub-sentence value is decreased by one. If the word is an auxiliary, the value of the sentence is not changed, but if the word is a negative form of an auxiliary, the sub-sentence value becomes the same time -1. The value of each sub-sentence is summed with the other to create the value of the review. if this value is more than 0, the review is considered positive, is it is less than 0 it is considered a negative review. if the value is 0, the review is considered a neutral review.
+\\this analysis can be wrong because there a numerous neutral words, and sometimes the first word of a sentence is a word used to determine if a auxiliary is at a negative form or not, the sub-sentence value is then 0 and unchanged because 0*-1 is still 0. that is why I implemented a second review analysis. 
+\item The sub-sentence analysis.
+\\This analysis checks the presence of each word, positive or negative, in the sub sentences, and only after all these words are found, it checks the auxiliaries to determine if it is a positive or a negative sub-sentence. finding a positive or negative word has the same effect in both analysis methods, the same process is use for the auxiliaries research.
+}
 \textbf{Shankar : } included reviews and some terms in text files.
 \\
 Everyone took part in writing this report.
