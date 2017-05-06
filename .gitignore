@@ -1,2 +1,7 @@
 *.pyc
 __pycache__/parseReview.cpython-36.pyc
+/TAL---reviews-classification.pyproj
+/TAL---reviews-classification.sln
+/TAL---reviews-classification1.pyproj
+/.vs/TAL---reviews-classification1/v14
+/.vs/TAL---reviews-classification/v14

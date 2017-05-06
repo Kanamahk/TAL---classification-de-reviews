@@ -7,8 +7,13 @@ reviewsdirectory = "./reviews"
 
 if __name__=="__main__":
 	myReviewsFileName = os.listdir(reviewsdirectory)
+	myReviews =[]
 	for r in myReviewsFileName:
-		myReviews.add(getReviewsFromFile(reviewsdirectory + '/' + r))
+		myReviews.append(getWholeReviewFromFile(reviewsdirectory + '/' + r))
 		
 	for r in myReviews:
-		printWholeReview(r)
+		#printWholeReview(r)
+		print("\n\ntoken analyse\n")
+		print_token_analyse_review(r[5])
+		print("\n\nsubsent analyse\n")
+		print_subsent_analyse_review(r[5])
