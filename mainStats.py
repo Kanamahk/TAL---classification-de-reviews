@@ -1,10 +1,13 @@
 #-*-coding:utf-8-*-
 
 import os
+from collections import OrderedDict
 from parseReview import *
 from treatments import *
+from writeInFileFunctions import *
 
 reviewsdirectory = "./reviews"
+outputFile = "of.txt"
 
 if __name__=="__main__":
 	myReviewsFileName = os.listdir(reviewsdirectory)
@@ -17,8 +20,7 @@ if __name__=="__main__":
 	for r in myReviews:
 		#printWholeReview(r)
 		
-		
-		paras = getReview(r)
+		paras = text_into_paragraphs(getReview(r))
 
 		# preprocess alice in wonderland
 		preprocessed = []
@@ -27,8 +29,9 @@ if __name__=="__main__":
 			sents = segment_into_sents(para)
 			
 			for sent in sents:
-				sent = normalise(sent, "en")
-				sent = tokenise(sent, "en")
+				sent = normalise(sent)
+				print(sent)
+				sent = tokenise(sent)
 
 				preprocessed_sents.append(sent)
 				
@@ -36,7 +39,9 @@ if __name__=="__main__":
 			
 		tok2count = get_tok2count(preprocessed)
 
-		tok2count = sort_dict_by_value(tok2count)
+		#tok2count = sort_dict_by_value(tok2count)
+		tok2count = OrderedDict(sorted(tok2count.items(), key=lambda t: t[0]))
+		
 		write_dict(tok2count, outputFile)
 
 
